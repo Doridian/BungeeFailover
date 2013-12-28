@@ -1,0 +1,4 @@
+name: BungeeFailover
+main : de.doridian.bungeefailover.BungeeFailover
+version: 0.0.1
+author: Doridian

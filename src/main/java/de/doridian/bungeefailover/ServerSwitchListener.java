@@ -5,6 +5,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
+import net.md_5.bungee.api.event.ServerKickEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -18,6 +19,22 @@ public class ServerSwitchListener implements Listener {
 	@EventHandler
 	public void onPlayerDisconnect(PlayerDisconnectEvent event) {
 		plugin.playerNameToServerMap.remove(event.getPlayer().getName().toLowerCase());
+	}
+
+	@EventHandler
+	public void onPlayerKicked(ServerKickEvent event) {
+		String kickReason = event.getKickReason();
+		if(kickReason.startsWith("kick|")) {
+			event.setKickReason(kickReason.substring(5));
+			return;
+		}
+
+		event.setCancelled(true);
+
+		if(plugin.failoverServer.equals(event.getPlayer().getServer().getInfo()))
+			event.setCancelServer(plugin.mainServer);
+		else
+			event.setCancelServer(plugin.failoverServer);
 	}
 
 	private void playerSwitchToServer(ProxiedPlayer player, ServerInfo serverInfo) {

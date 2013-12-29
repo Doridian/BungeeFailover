@@ -24,10 +24,8 @@ public class ServerSwitchListener implements Listener {
 	@EventHandler
 	public void onPlayerKicked(ServerKickEvent event) {
 		String kickReason = event.getKickReason();
-		if(kickReason.startsWith("kick|")) {
-			event.setKickReason(kickReason.substring(5));
+		if(kickReason.contains("\u00a7r"))
 			return;
-		}
 
 		event.setCancelled(true);
 

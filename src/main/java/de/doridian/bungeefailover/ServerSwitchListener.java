@@ -29,7 +29,7 @@ public class ServerSwitchListener implements Listener {
 
 		event.setCancelled(true);
 
-		if(plugin.failoverServer.equals(event.getPlayer().getServer().getInfo()))
+		if(event.getPlayer().getServer() == null || plugin.failoverServer.equals(event.getPlayer().getServer().getInfo()))
 			event.setCancelServer(plugin.mainServer);
 		else
 			event.setCancelServer(plugin.failoverServer);

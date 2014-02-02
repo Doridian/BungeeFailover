@@ -23,13 +23,16 @@ public class ServerSwitchListener implements Listener {
 
 	@EventHandler
 	public void onPlayerKicked(ServerKickEvent event) {
+		if(event.getPlayer() == null || event.getPlayer().getServer() == null || plugin.mainServer == null || plugin.failoverServer == null)
+			return;
+		
 		String kickReason = event.getKickReason();
 		if(kickReason.contains("\u00a7r"))
 			return;
 
 		event.setCancelled(true);
 
-		if(event.getPlayer().getServer() == null || plugin.failoverServer.equals(event.getPlayer().getServer().getInfo()))
+		if(plugin.failoverServer.equals(event.getPlayer().getServer().getInfo()))
 			event.setCancelServer(plugin.mainServer);
 		else
 			event.setCancelServer(plugin.failoverServer);

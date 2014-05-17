@@ -17,6 +17,5 @@ public class BungeeFailover extends Plugin {
 		mainServer = getProxy().getServerInfo("main");
 		getProxy().getPluginManager().registerCommand(this, new IsOnlineCommand(this));
 		getProxy().getPluginManager().registerListener(this, new ServerSwitchListener(this));
-		getLogger().info("Done! (0.00s)");
 	}
 }

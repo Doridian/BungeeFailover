@@ -13,7 +13,7 @@ public class BungeeFailover extends Plugin {
 
 	@Override
 	public void onEnable() {
-		failoverServer = getProxy().getServerInfo("lobby");
+		failoverServer = getProxy().getServerInfo("failover");
 		mainServer = getProxy().getServerInfo("main");
 		getProxy().getPluginManager().registerCommand(this, new IsOnlineCommand(this));
 		getProxy().getPluginManager().registerListener(this, new ServerSwitchListener(this));

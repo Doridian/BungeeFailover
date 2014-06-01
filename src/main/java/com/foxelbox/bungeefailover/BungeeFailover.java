@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BungeeFailover.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.doridian.bungeefailover;
+package com.foxelbox.bungeefailover;
 
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.plugin.Plugin;

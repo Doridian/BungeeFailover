@@ -43,7 +43,7 @@ public class ServerSwitchListener implements Listener {
 			return;
 		
 		String kickReason = event.getKickReason();
-		if(kickReason.contains("\u00a7r"))
+		if(kickReason.startsWith("[Kicked] "))
 			return;
 
 		event.setCancelled(true);

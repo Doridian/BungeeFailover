@@ -43,9 +43,9 @@ public class ServerSwitchListener implements Listener {
 			return;
 		
 		String kickReason = event.getKickReason();
-		System.out.println("KR: " + kickReason);
 		if(kickReason.startsWith("[Kicked] "))
 			return;
+		System.out.println("KR: " + kickReason);
 
 		event.setCancelled(true);
 

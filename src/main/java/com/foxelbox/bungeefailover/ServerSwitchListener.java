@@ -16,6 +16,8 @@
  */
 package com.foxelbox.bungeefailover;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
@@ -41,13 +43,15 @@ public class ServerSwitchListener implements Listener {
 	public void onPlayerKicked(ServerKickEvent event) {
 		if(event.getPlayer() == null || event.getPlayer().getServer() == null || plugin.mainServer == null || plugin.failoverServer == null)
 			return;
-		
-		String kickReason = event.getKickReason();
-		for(char c : kickReason.toCharArray()) {
-			System.out.println("C " + c);
+
+		for(BaseComponent component : event.getKickReasonComponent()) {
+			if(component instanceof TextComponent) {
+				if(((TextComponent)component).getText().startsWith("[Kicked]"))
+					return;
+				else
+					break;
+			}
 		}
-		if(kickReason.startsWith("[Kicked] "))
-			return;
 
 		event.setCancelled(true);
 
